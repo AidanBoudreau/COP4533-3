@@ -5,6 +5,7 @@
 #include <string>
 #include <sstream>
 using namespace std;
+#include <algorithm>
 
 
 int main(){
@@ -64,21 +65,11 @@ int main(){
     for (int i = 1; i < A.size()+1; i++){
         for (int j = 1; j < B.size()+1; j++){
             if (A[i-1]==B[j-1]){
-                dp[i][j] = value.at(A[i-1]) + std::max(dp[i-1][j-1], dp[i][j-1]);
+                dp[i][j]= std::max({value.at(A[i-1]) + dp[i-1][j-1], dp[i][j-1], dp[i-1][j]});
             }
             else {
-                dp[i][j]=dp[i][j-1];
+                dp[i][j]= std::max(dp[i][j-1], dp[i-1][j]);
             }
-        }
-    }
-
-
-    //get largest val in top line
-    int max = 0;
-    int maxcol=0;
-    for (int i = 0; i< nA; i++){
-        if (dp[i][nB] > max){
-            max = dp[i][nB];
         }
     }
 
@@ -86,7 +77,7 @@ int main(){
     //backtracking
 
 
-    if (max==0){
+    if (dp[nA][nB]==0){
         ofstream outputFile;    //if max is 0 there is no solution
         outputFile.open("output.txt");
         outputFile << 0;
@@ -98,34 +89,26 @@ int main(){
     vector<int> cols;
     int col = nA;
     int row = nB;
-    int col_start;
-
-
-    while (col != 0){   //get max col
-        if (dp[col][row] == max){
-            break;
+    string sol= ""; //get solution string
+   
+    while (col > 0 && row > 0){  //if not 0 then it must have come from diagonal.
+        if (A[col-1]==B[row-1] && dp[col][row] == dp[col-1][row-1] + value.at(A[col-1])){
+            sol = A[col-1] + sol;
+            col = col-1;
+            row = row-1;
         }
-        else{
+        else if (dp[col][row] == dp[col-1][row]){
             col=col-1;
         }
+        else{
+            row = row-1;
+        }
     }
-    col_start=col;
-    while (col_start > 0 && row > 0 && dp[col_start][row]!=0){  //if not 0 then it must have come from diagonal.
-        cols.push_back(col_start);
-        col_start=col_start-1;
-        row=row-1;
-    }
-    string sol= ""; //get solution string
-    for (int i = 0; i<cols.size(); i++){
-        sol = sol+A[A.size()-cols[i]-1];
-    }
-
-
 
 
     ofstream outputFile;    //print solution to output file
     outputFile.open("output.txt");
-    outputFile << max<<"\n";
+    outputFile << dp[nA][nB]<<"\n";
     outputFile << sol;
     outputFile.close();
 
