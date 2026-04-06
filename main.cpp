@@ -75,6 +75,7 @@ int main(){
 
     //get largest val in top line
     int max = 0;
+    int maxcol=0;
     for (int i = 0; i< nA; i++){
         if (dp[i][nB] > max){
             max = dp[i][nB];
@@ -100,23 +101,35 @@ int main(){
     int col_start;
 
 
-    while (col != 0){
-        if (dp[col][row] == 0){
-            col = col-1;
+    while (col != 0){   //get max col
+        if (dp[col][row] == max){
+            break;
+        }
+        else{
+            col=col-1;
         }
     }
     col_start=col;
-    cols.push_back(col_start);
-   
+    while (col_start > 0 && row > 0 && dp[col_start][row]!=0){  //if not 0 then it must have come from diagonal.
+        cols.push_back(col_start);
+        col_start=col_start-1;
+        row=row-1;
+    }
+    string sol= ""; //get solution string
+    for (int i = 0; i<cols.size(); i++){
+        sol = sol+A[A.size()-cols[i]-1];
+    }
 
 
 
 
     ofstream outputFile;    //print solution to output file
     outputFile.open("output.txt");
-    outputFile << dp[nA][nB];
+    outputFile << max<<"\n";
+    outputFile << sol;
     outputFile.close();
-    cout<<max<<endl;
+
+
     return dp[nA][nB];
 }
 
