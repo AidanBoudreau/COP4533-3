@@ -50,8 +50,8 @@ Change `input.txt` before running. View output in `output.txt`. Will also need g
 ## Question 1: Empirical Comparison
 
 ![Graph](graph/graph.png)
+This output uses the same number of k, so it is really O(n*m) but the difference with k being small is minimal.  
 
-This output uses the same number of k, so it is really O(n*m) but the difference with k being small is minimal.
 ---
 
 ## Question 2: Recurrence Equation
