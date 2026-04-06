@@ -4,8 +4,8 @@
 #include <fstream>
 #include <string>
 #include <sstream>
-using namespace std;
 #include <algorithm>
+using namespace std;
 
 
 int main(){
@@ -73,7 +73,6 @@ int main(){
         }
     }
 
-
     //backtracking
 
 
@@ -90,7 +89,8 @@ int main(){
     int col = nA;
     int row = nB;
     string sol= ""; //get solution string
-   
+
+
     while (col > 0 && row > 0){  //if not 0 then it must have come from diagonal.
         if (A[col-1]==B[row-1] && dp[col][row] == dp[col-1][row-1] + value.at(A[col-1])){
             sol = A[col-1] + sol;
@@ -104,7 +104,6 @@ int main(){
             row = row-1;
         }
     }
-
 
     ofstream outputFile;    //print solution to output file
     outputFile.open("output.txt");
