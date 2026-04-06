@@ -51,6 +51,7 @@ Change `input.txt` before running. View output in `output.txt`. Will also need g
 
 ![Graph](graph/graph.png)
 
+This output uses the same number of k, so it is really O(n*m) but the difference with k being small is minimal.
 ---
 
 ## Question 2: Recurrence Equation
