@@ -1,4 +1,6 @@
 # Programming Assignment 3
+Aidan Boudreau  
+22043059  
 
 ## Overview
 
@@ -41,13 +43,13 @@ g++ main.cpp -o main.exe
 ./main.exe
 ```
 
-Change `input.txt` before running. View output in `output.txt`.
+Change `input.txt` before running. View output in `output.txt`. Will also need g++ compiler, or can use another c++ compiler of your chosing. command is given for g++.
 
 ---
 
 ## Question 1: Empirical Comparison
 
-![Runtime Graph](runtime_graph.png)
+![Graph](graph/graph.png)
 
 ---
 
